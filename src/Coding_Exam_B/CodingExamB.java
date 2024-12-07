@@ -24,7 +24,7 @@ public class CodingExamB {
 		 *    into one large String. The string will also state the file name and
 		 *    the line number for where each TODO was found. 
 		*/
-		String str = fileName+ "\n";
+		String str = "File: " + fileName+ "\n";
 		boolean reading = true;
 		int counter = 0;
 		try {
@@ -33,16 +33,22 @@ public class CodingExamB {
 			try {
 				while(reading) {
 					String line = br.readLine();
+					
 					if (line == null) {
 						reading = false;
+						
 					}
+					
 					else if (line.contains("//TODO")) {
-						fileName += (counter+1) + ": " + line + " \n ";
-						System.out.println(fileName);
+						
+						str += (counter+1) + ": " + line.trim() + "\n";
+						System.out.print(str);
 
 					}
+					
 					counter ++;
 				}
+				str += "\n";
 				
 			}
 			catch(IOException e){
@@ -57,7 +63,7 @@ public class CodingExamB {
 
 			
 			
-		return fileName;
+		return str;
 	}
 	
 	public static void main(String[] args) {
@@ -72,9 +78,10 @@ public class CodingExamB {
 		try {
 			FileWriter fw = new FileWriter("TODO_Log.txt");
 			String[] input = finalLogString.split("||");
-			System.out.println(input.length);
+
 			for (int i = 0; i < input.length; i++) {
 				fw.write(input[i]);
+				System.out.print(input[i]);
 			}
 			
 			fw.close();
